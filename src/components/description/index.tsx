@@ -1,4 +1,4 @@
-import { Buildings, ArrowUpRight, GithubLogo, UserCirclePlus, MapPin } from 'phosphor-react';
+import { Buildings, ArrowUpRight, GithubLogo, UserCirclePlus, MapPin, Stack } from 'phosphor-react';
 import { DescriptionCard, DescriptionContainer, Button, Input, CardIssues, CardIssuesContainer } from './styles';
 import api from "../../services/api";
 import { useState } from 'react';
@@ -13,10 +13,11 @@ type GITHUBResponse = {
   location: string;
 }
 
-type GITHUBInssuesResponse = {
+interface GITHUBInssuesResponse {
+  id: number;
+  node_id: string;
   name: string;
   description: string;
-  html_url: string;
 }
 
 export function Description() {
@@ -47,12 +48,16 @@ export function Description() {
         handleSearchIssues();
       }
 
-      const handleSearchIssues = () => {    
+
+      const handleSearchIssues = () => {
         api
-        .get<GITHUBInssuesResponse>(`/users/${search}/repos`)
-        .then((response) => {
-          console.log(response.data);
-                });
+          .get<GITHUBInssuesResponse[]>(`/users/${search}/repos`)
+          .then((response) => {
+            setRepositories(response.data);
+            console.log(response.data.length);
+          });
+
+
       }
 
          
@@ -73,10 +78,11 @@ export function Description() {
                  <h3 style={{ marginTop: '10px', color: "#5d6e80" }}>{ bio }</h3>
 
                 <div style={{ display: "flex", marginTop: '20px', padding: "2px", justifyContent: 'space-evenly'}} >
-                            <GithubLogo  size={32} style={{ color: "#5d6e80" }} /><h3 style={{ marginTop: "5px", color: "#5d6e80", marginLeft: '-10px' }}> { login }</h3>
-                            <Buildings  size={32} style={{ color: "#5d6e80" }} /><h3 style={{ marginTop: "5px", color: "#5d6e80", marginLeft: '-10px' }}>  { company } </h3>      
-                            <UserCirclePlus  size={32} style={{ color: "#5d6e80" }} /><h3 style={{ marginTop: "5px", color: "#5d6e80", marginLeft: '-10px'  }}> { followers } seguidores</h3>
-                            <MapPin  size={32} style={{ color: "#5d6e80" }} /><h3 style={{ marginTop: "5px", color: "#5d6e80", marginLeft: '-10px'  }}> { location }</h3>
+                            <GithubLogo  size={32} style={{ color: "#5d6e80" }} /><h3 style={{ marginTop: "5px", color: "#5d6e80", marginLeft: '-6px' }}> { login }</h3>
+                            <Buildings  size={32} style={{ color: "#5d6e80" }} /><h3 style={{ marginTop: "5px", color: "#5d6e80", marginLeft: '-6px' }}>  { company } </h3>      
+                            <UserCirclePlus  size={32} style={{ color: "#5d6e80" }} /><h3 style={{ marginTop: "5px", color: "#5d6e80", marginLeft: '-6px'  }}> { followers } seguidores</h3>
+                            <MapPin  size={32} style={{ color: "#5d6e80" }} /><h3 style={{ marginTop: "5px", color: "#5d6e80", marginLeft: '-6px'  }}> { location }</h3>
+                            <Stack size={32} style={{ color: "#5d6e80" }} /><h3 style={{ marginTop: "5px", color: "#5d6e80", marginLeft: '-6px'  }}> { repositories.length }</h3>
                 
                 </div>
             
@@ -104,7 +110,7 @@ export function Description() {
             <CardIssuesContainer>
               <CardIssues variant="green">
                 <header>
-                  <h1>{ name } </h1>
+                  <h1> { name }  </h1>
                   <h5>Há 1 dia</h5>
                 <p>Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in JavaScript and what properties they have. These can be used to build other data structures. Wherever possible, comparisons with other languages are drawn.</p>
                   
