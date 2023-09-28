@@ -13,6 +13,12 @@ type GITHUBResponse = {
   location: string;
 }
 
+type GITHUBInssuesResponse = {
+  name: string;
+  description: string;
+  html_url: string;
+}
+
 export function Description() {
     const [search, setSearch] = useState("");
     const [login, setLogin] = useState("");
@@ -22,6 +28,8 @@ export function Description() {
     const [company, setCompany] = useState("");
     const [followers, setFollowers] = useState("");
     const [location, setLocation] = useState("");
+
+    const [repositories, setRepositories] = useState<GITHUBInssuesResponse[]>([]);
 
     const handleSearch = () => {    
         api
@@ -35,21 +43,16 @@ export function Description() {
           setFollowers(response.data.followers);
           setLocation(response.data.location);
         });
+
+        handleSearchIssues();
       }
-      console.log(search);
 
       const handleSearchIssues = () => {    
         api
-        .get<GITHUBResponse>(`/users/${search}/repos`)
+        .get<GITHUBInssuesResponse>(`/users/${search}/repos`)
         .then((response) => {
-          setLogin(response.data.login);
-          setName(response.data.name);
-          setBio(response.data.bio);
-          setAvatarUrl(response.data.avatar_url);
-          setCompany(response.data.company);
-          setFollowers(response.data.followers);
-          setLocation(response.data.location);
-        });
+          console.log(response.data);
+                });
       }
 
          
@@ -101,7 +104,7 @@ export function Description() {
             <CardIssuesContainer>
               <CardIssues variant="green">
                 <header>
-                  <h1>{ location } </h1>
+                  <h1>{ name } </h1>
                   <h5>Há 1 dia</h5>
                 <p>Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in JavaScript and what properties they have. These can be used to build other data structures. Wherever possible, comparisons with other languages are drawn.</p>
                   
