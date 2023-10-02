@@ -114,7 +114,7 @@ export function Description() {
                               <CardIssues variant="green">
                                  <header>                                   
                                     <h1>{! repo.name ? (
-                                      <h1>Nenhum Nome encontrada</h1>
+                                      <h1>Nenhum Nome encontrado</h1>
                                     ) : (   repo.name ) }</h1><br /><br />
                                     <h5>{! repo.created_at ? (
                                       <h1>Nenhuma data encontrada</h1>
