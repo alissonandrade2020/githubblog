@@ -69,7 +69,7 @@ interface CardIssuesContainerProps {
 
 export const CardIssues = styled.div<CardIssuesContainerProps>`
 width: 450px;
-height: 250px;
+height: 200px;
 background: ${(props) => props.theme['gray-750']};
 color: var(--gray);
 border-radius: 8px;
