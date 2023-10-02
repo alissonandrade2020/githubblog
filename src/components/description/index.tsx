@@ -118,9 +118,9 @@ export function Description() {
                                     <h1 style={{ color: "#ffff" }}>{! repo.name ? (
                                       <h1>Nenhum Nome encontrado</h1>
                                     ) : (   repo.name ) }</h1><br /><br />
-                                    <h5>{! repo.created_at ? (
+                                    <h5 style={{ color:"#3294f8" }}>{! repo.created_at ? (
                                       <h1>Nenhuma data encontrada</h1>
-                                    ) : (   repo.created_at ) }</h5><br /><br />
+                                    ) : ( new Date(repo.created_at).toLocaleDateString("pt-BR")   ) }</h5><br /><br />
                                     <p>{! repo.description ? (
                                       <h1>Nenhuma descrição encontrada</h1>
                                     ) : (   repo.description ) }</p>
