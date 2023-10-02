@@ -13,11 +13,13 @@ type GITHUBResponse = {
   location: string;
 }
 
-interface GITHUBInssuesResponse {
+type GITHUBInssuesResponse = {
   id: number;
   node_id: string;
   name: string;
   description: string;
+  html_url: string;
+  created_at: string;
 }
 
 export function Description() {
@@ -54,10 +56,7 @@ export function Description() {
           .get<GITHUBInssuesResponse[]>(`/users/${search}/repos`)
           .then((response) => {
             setRepositories(response.data);
-            console.log(response.data.length);
           });
-
-
       }
 
          
@@ -107,37 +106,33 @@ export function Description() {
                 <Button onClick={handleSearch} >Buscar</Button>
             </div>
             <br />
-            <CardIssuesContainer>
-              <CardIssues variant="green">
-                <header>
-                  <h1> { name }  </h1>
-                  <h5>Há 1 dia</h5>
-                <p>Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in JavaScript and what properties they have. These can be used to build other data structures. Wherever possible, comparisons with other languages are drawn.</p>
-                  
-                </header>
 
-              </CardIssues>
+           { repositories.length > 0 ? (
+                     <CardIssuesContainer>
+                        {
+                            repositories.map((repo) => (
+                              <CardIssues variant="green">
+                                 <header>                                   
+                                    <h1>{! repo.name ? (
+                                      <h1>Nenhum Nome encontrada</h1>
+                                    ) : (   repo.name ) }</h1><br /><br />
+                                    <h5>{! repo.created_at ? (
+                                      <h1>Nenhuma data encontrada</h1>
+                                    ) : (   repo.created_at ) }</h5><br /><br />
+                                    <p>{! repo.description ? (
+                                      <h1>Nenhuma descrição encontrada</h1>
+                                    ) : (   repo.description ) }</p> 
+                                  </header>
+                              </CardIssues> 
+                            ))
+                        }
+                     </CardIssuesContainer>
+                ) : (
+                    <p>Carregando repositórios...</p>
+                )
 
-              <CardIssues>
-                <header>
-                <h1>JavaScript data</h1>
-                  <h5>Há 9 dia</h5>
-                <p>Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in JavaScript and what properties they have. These can be used to build other data structures. Wherever possible, comparisons with other languages are drawn.</p>
-                  
-                </header>
-
-              </CardIssues>
-
-              <CardIssues variant="green" >
-                <header>
-                <h1>JavaScript data</h1>
-                  <h5>Há 5 dia</h5>
-                <p>Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in JavaScript and what properties they have. These can be used to build other data structures. Wherever possible, comparisons with other languages are drawn.</p>
-                  
-                </header>
-
-              </CardIssues>
-            </CardIssuesContainer>
+              }
+             
     </DescriptionContainer>
   )
 }

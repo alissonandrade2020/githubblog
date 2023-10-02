@@ -54,17 +54,13 @@ export const DescriptionCard = styled.div<DescriptionCardProps>`
 }
 `
 
-export const CardIssuesContainer = styled.section`
-  width: 100%;
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-
-  margin-top: -5rem;
+export const CardIssuesContainer = styled.section` 
+   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-block: 1rem;
 `
 
 interface CardIssuesContainerProps {
@@ -72,23 +68,15 @@ interface CardIssuesContainerProps {
 }
 
 export const CardIssues = styled.div<CardIssuesContainerProps>`
-  background: ${(props) => props.theme['gray-750']};
-  border-radius: 6px;
-  padding: 4rem;
-  margin-top: 4rem;
-
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: ${(props) => props.theme['gray-300']};
-  }
-
-  
-
-  ${(props) =>
-    props.variant === 'green' &&
-    css`
-      background: ${props.theme['blue-600']};
-    `}
+width: 450px;
+height: 250px;
+background: ${(props) => props.theme['gray-750']};
+color: var(--gray);
+border-radius: 8px;
+box-shadow: 1px 1px 8px ${(props) => props.theme['gray-300']};
+padding: 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
 `
