@@ -115,7 +115,7 @@ export function Description() {
                               <CardIssues variant="green">
                                  <header>          
                                                     
-                                    <h1 style={{ textDecoration: "none", color: "#ffff" }}>{! repo.name ? (
+                                    <h1 style={{ color: "#ffff" }}>{! repo.name ? (
                                       <h1>Nenhum Nome encontrado</h1>
                                     ) : (   repo.name ) }</h1><br /><br />
                                     <h5>{! repo.created_at ? (
