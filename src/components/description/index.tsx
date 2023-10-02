@@ -111,8 +111,10 @@ export function Description() {
                      <CardIssuesContainer>
                         {
                             repositories.map((repo) => (
+                            <a style={{ textDecoration: "none", color: "#cccc" }} href={repo.html_url} target='_blank'>      
                               <CardIssues variant="green">
-                                 <header>                                   
+                                 <header>          
+                                                    
                                     <h1>{! repo.name ? (
                                       <h1>Nenhum Nome encontrado</h1>
                                     ) : (   repo.name ) }</h1><br /><br />
@@ -121,9 +123,9 @@ export function Description() {
                                     ) : (   repo.created_at ) }</h5><br /><br />
                                     <p>{! repo.description ? (
                                       <h1>Nenhuma descrição encontrada</h1>
-                                    ) : (   repo.description ) }</p> 
+                                    ) : (   repo.description ) }</p>
                                   </header>
-                              </CardIssues> 
+                              </CardIssues>  </a>
                             ))
                         }
                      </CardIssuesContainer>
